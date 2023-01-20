@@ -1,5 +1,7 @@
 package lab3.models.text;
 
+import javax.annotation.Nonnull;
+
 import lab3.models.common.Appearance;
 import lab3.models.text.interfaces.Adverb;
 import lab3.models.text.interfaces.Modifier;
@@ -14,12 +16,12 @@ public class CompoundMidifier implements Modifier {
     }
 
     @Override
-    public String getCased(Case c) {
+    public @Nonnull String getCased(@Nonnull Case c) {
         return preModifier.getAdverb() + " " + modifier.getCased(c);
     }
 
     @Override
-    public Appearance getAppearance() {
+    public @Nonnull Appearance getAppearance() {
         return modifier.getAppearance().merge(preModifier.getAppearance());
     }
 

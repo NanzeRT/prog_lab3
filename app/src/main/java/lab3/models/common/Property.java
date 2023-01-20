@@ -5,7 +5,9 @@ public enum Property {
     Bright,
     Red,
     Mountain,
-    Cloud,
     Giant,
     Glassy,
+    Rocky,
+    Sharp,
+    Static,
 }

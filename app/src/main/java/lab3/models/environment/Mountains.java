@@ -1,128 +1,89 @@
 package lab3.models.environment;
 
+import javax.annotation.Nonnull;
+
 import lab3.models.common.Appearance;
-import lab3.models.common.interfaces.HasAppearance;
-import lab3.models.text.Case;
+import lab3.models.common.Property;
 import lab3.models.text.Name;
-import lab3.models.text.interfaces.HasCases;
 
-public class Mountains implements EnvinronmentObject {
-    private Name name;
-    private Tops tops;
-    private Slopes slopes;
-    private Appearance appearance;
+public class Mountains extends EnvinronmentObject {
+    private final @Nonnull Tops tops;
+    private final @Nonnull Slopes slopes;
 
-    public class Tops implements HasCases, HasAppearance {
-        private Name name;
-
-        public Tops(Name name) {
-            this.name = name;
+    public class Tops extends EnvinronmentObject {
+        public Tops(@Nonnull Name name, @Nonnull Appearance appearance) {
+            super(name, appearance);
         }
 
-        public String getCased(Case c) {
-            return name.getCased(c);
-        }
-
-        public String getName() {
-            return name.getCased(Case.NOMINATIVE);
-        }
-
-        @Override
-        public Appearance getAppearance() {
-            return name.getAppearance();
-        }
-
-        @Override
-        public String toString() {
-            return "Tops{" +
-                    "name=" + name +
-                    '}';
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (getClass() != obj.getClass())
-                return false;
-            Tops other = (Tops) obj;
-            if (name == null) {
-                if (other.name != null)
-                    return false;
-            } else if (!name.equals(other.name))
-                return false;
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            return name.hashCode();
+        public Tops(@Nonnull Name name) {
+            super(name);
         }
     }
 
-    public class Slopes implements HasCases, HasAppearance {
-        private Name name;
-
-        public Slopes(Name name) {
-            this.name = name;
+    public class Slopes extends EnvinronmentObject {
+        public Slopes(@Nonnull Name name, @Nonnull Appearance appearance) {
+            super(name, appearance);
         }
 
-        @Override
-        public String getCased(Case c) {
-            return name.getCased(c);
-        }
-
-        public String getName() {
-            return name.getCased(Case.NOMINATIVE);
-        }
-
-        @Override
-        public Appearance getAppearance() {
-            return name.getAppearance();
+        public Slopes(@Nonnull Name name) {
+            super(name);
         }
     }
 
-    public Mountains(Name name, Tops tops, Slopes slopes) {
-        this.name = name;
+    public Mountains(@Nonnull Name name, @Nonnull Tops tops, @Nonnull Slopes slopes) {
+        super(name);
         this.tops = tops;
         this.slopes = slopes;
     }
 
-    public Mountains addTops(Name name) {
-        tops = new Tops(name);
-        return this;
+    public Mountains(@Nonnull Name name, @Nonnull Tops tops, @Nonnull Slopes slopes, @Nonnull Appearance appearance) {
+        super(name, appearance);
+        this.tops = tops;
+        this.slopes = slopes;
     }
 
-    public Mountains addSlopes(Name name) {
-        slopes = new Slopes(name);
-        return this;
-    }
-
-    public Tops getTops() {
+    public @Nonnull Tops getTops() {
         return tops;
     }
 
-    public Slopes getSlopes() {
+    public @Nonnull Slopes getSlopes() {
         return slopes;
     }
 
     @Override
-    public String getCased(Case c) {
-        return name.getCased(c);
+    public @Nonnull Appearance getAppearance() {
+        return super.getAppearance().merge(tops.getAppearance()).merge(slopes.getAppearance());
     }
 
     @Override
-    public String getShortCased(Case c) {
-        return name.getShortCased(c);
+    protected @Nonnull Appearance defaultAppearance() {
+        return new Appearance(Property.Giant, Property.Rocky, Property.Static);
     }
 
     @Override
-    public String getName() {
-        return name.getCased(Case.NOMINATIVE);
+    public String toString() {
+        return "Mountains{" +
+                "name=" + name +
+                ", tops=" + tops +
+                ", slopes=" + slopes +
+                ", appearance=" + appearance +
+                '}';
     }
 
     @Override
-    public Appearance getAppearance() {
-        return appearance.merge(name.getAppearance()).merge(tops.getAppearance()).merge(slopes.getAppearance());
+    public boolean equals(Object obj) {
+        if (!super.equals(obj))
+            return false;
+        Mountains mountains = (Mountains) obj;
+        return tops.equals(mountains.tops) && slopes.equals(mountains.slopes);
     }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + tops.hashCode();
+        result = 31 * result + slopes.hashCode();
+        return result;
+    }
+
 }

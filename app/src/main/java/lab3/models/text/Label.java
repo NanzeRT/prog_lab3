@@ -1,42 +1,29 @@
 package lab3.models.text;
 
-import lab3.models.common.Appearance;
-import lab3.models.common.interfaces.HasAppearance;
+import javax.annotation.Nonnull;
+
 import lab3.models.text.interfaces.HasCases;
 
-public class Label implements HasCases, HasAppearance {
-    private final String name;
-    private final String genitive;
-    private final String dative;
-    private final String accusative;
-    private final String instrumental;
-    private final String prepositional;
-    private final Appearance appearance;
+public class Label implements HasCases {
+    private final @Nonnull String name;
+    private final @Nonnull String genitive;
+    private final @Nonnull String dative;
+    private final @Nonnull String accusative;
+    private final @Nonnull String instrumental;
+    private final @Nonnull String prepositional;
 
-    public Label(String name, String genitive, String dative,
-            String accusative, String instrumental, String prepositional, Appearance appearance) {
+    public Label(@Nonnull String name, @Nonnull String genitive, @Nonnull String dative,
+            @Nonnull String accusative, @Nonnull String instrumental, @Nonnull String prepositional) {
         this.name = name;
         this.genitive = genitive;
         this.dative = dative;
         this.accusative = accusative;
         this.instrumental = instrumental;
         this.prepositional = prepositional;
-        this.appearance = appearance;
-    }
-
-    public Label(String name, String genitive, String dative,
-            String accusative, String instrumental, String prepositional) {
-        this.name = name;
-        this.genitive = genitive;
-        this.dative = dative;
-        this.accusative = accusative;
-        this.instrumental = instrumental;
-        this.prepositional = prepositional;
-        this.appearance = new Appearance();
     }
 
     @Override
-    public String getCased(Case c) {
+    public @Nonnull String getCased(@Nonnull Case c) {
         switch (c) {
             case NOMINATIVE:
                 return name;
@@ -51,13 +38,8 @@ public class Label implements HasCases, HasAppearance {
             case PREPOSITIONAL:
                 return prepositional;
             default:
-                return null;
+                throw new IllegalArgumentException("Unknown case: " + c);
         }
-    }
-
-    @Override
-    public Appearance getAppearance() {
-        return appearance;
     }
 
     @Override

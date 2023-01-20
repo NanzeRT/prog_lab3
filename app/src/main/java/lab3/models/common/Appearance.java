@@ -2,6 +2,8 @@ package lab3.models.common;
 
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import lab3.models.actors.Sense;
 
 public class Appearance {
@@ -15,7 +17,7 @@ public class Appearance {
         this.properties = properties;
     }
 
-    public Appearance merge(Appearance other) {
+    public @Nonnull Appearance merge(@Nonnull Appearance other) {
         Set<Property> newProperties = Set.copyOf(properties);
         newProperties.addAll(other.properties);
         return new Appearance(newProperties);

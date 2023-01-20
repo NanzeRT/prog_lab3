@@ -1,7 +1,10 @@
 package lab3.models.text.interfaces;
 
+import javax.annotation.Nonnull;
+
 import lab3.models.text.Case;
 
 public interface HasCases {
-    String getCased(Case c);
+    @Nonnull
+    String getCased(@Nonnull Case c);
 }

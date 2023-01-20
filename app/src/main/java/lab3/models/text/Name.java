@@ -3,44 +3,49 @@ package lab3.models.text;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import lab3.models.common.Appearance;
 import lab3.models.common.interfaces.HasAppearance;
 import lab3.models.text.interfaces.HasCases;
 import lab3.models.text.interfaces.Modifier;
 
 public class Name implements HasCases, HasAppearance {
-    private List<Modifier> modifiers = new ArrayList<>();
-    private Label name;
+    private @Nonnull List<Modifier> modifiers = new ArrayList<>();
+    private @Nonnull Label name;
 
-    public Name(Label name) {
+    public Name(@Nonnull Label name) {
         this.name = name;
     }
 
-    public Name addModifier(Modifier modifier) {
+    public @Nonnull Name addModifier(Modifier modifier) {
         modifiers.add(modifier);
         return this;
     }
 
     @Override
-    public Appearance getAppearance() {
-        Appearance appearance = name.getAppearance();
+    public @Nonnull Appearance getAppearance() {
+        Appearance appearance = new Appearance();
         for (Modifier m : modifiers)
             appearance = appearance.merge(m.getAppearance());
         return appearance;
     }
 
     @Override
-    public String getCased(Case c) {
+    public @Nonnull String getCased(@Nonnull Case c) {
         StringBuilder sb = new StringBuilder();
         for (Modifier m : modifiers) {
             sb.append(m.getCased(c));
             sb.append(" ");
         }
         sb.append(name.getCased(c));
-        return sb.toString();
+        var result = sb.toString();
+        if (result == null)
+            throw new AssertionError();
+        return result;
     }
 
-    public String getShortCased(Case c) {
+    public @Nonnull String getShortCased(@Nonnull Case c) {
         return name.getCased(c);
     }
 

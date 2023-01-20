@@ -1,19 +1,22 @@
 package lab3.models.text;
 
+import javax.annotation.Nonnull;
+
 import lab3.models.common.Appearance;
 import lab3.models.text.interfaces.Modifier;
 
 public class SingleModifier implements Modifier {
-    private final String modifier;
-    private final String genitive;
-    private final String dative;
-    private final String accusative;
-    private final String instrumental;
-    private final String prepositional;
-    private final Appearance appearance;
+    private final @Nonnull String modifier;
+    private final @Nonnull String genitive;
+    private final @Nonnull String dative;
+    private final @Nonnull String accusative;
+    private final @Nonnull String instrumental;
+    private final @Nonnull String prepositional;
+    private final @Nonnull Appearance appearance;
 
-    public SingleModifier(String modifier, String genitive, String dative,
-    String accusative, String instrumental, String prepositional, Appearance appearance) {
+    public SingleModifier(@Nonnull String modifier, @Nonnull String genitive, @Nonnull String dative,
+            @Nonnull String accusative, @Nonnull String instrumental, @Nonnull String prepositional,
+            @Nonnull Appearance appearance) {
         this.modifier = modifier;
         this.genitive = genitive;
         this.dative = dative;
@@ -23,8 +26,8 @@ public class SingleModifier implements Modifier {
         this.appearance = appearance;
     }
 
-    public SingleModifier(String modifier, String genitive, String dative,
-            String accusative, String instrumental, String prepositional) {
+    public SingleModifier(@Nonnull String modifier, @Nonnull String genitive, @Nonnull String dative,
+            @Nonnull String accusative, @Nonnull String instrumental, @Nonnull String prepositional) {
         this.modifier = modifier;
         this.genitive = genitive;
         this.dative = dative;
@@ -35,7 +38,7 @@ public class SingleModifier implements Modifier {
     }
 
     @Override
-    public String getCased(Case c) {
+    public @Nonnull String getCased(@Nonnull Case c) {
         switch (c) {
             case NOMINATIVE:
                 return modifier;
@@ -50,12 +53,12 @@ public class SingleModifier implements Modifier {
             case PREPOSITIONAL:
                 return prepositional;
             default:
-                return null;
+                throw new IllegalArgumentException("Unknown case: " + c);
         }
     }
 
     @Override
-    public Appearance getAppearance() {
+    public @Nonnull Appearance getAppearance() {
         return appearance;
     }
 
