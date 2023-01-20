@@ -2,16 +2,16 @@ package lab3.models.actors;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.common.interfaces.HasAppearance;
 import lab3.models.text.Case;
 import lab3.models.text.GenderOrMultiple;
 
 public class Group {
-    private @Nonnull List<Actor> actors;
+    private List<Actor> actors;
 
-    public Group(@Nonnull Actor... actors) throws GroupTooSmallException {
+    public Group(Actor... actors) throws GroupTooSmallException {
         var actorsList = List.of(actors);
         if (actorsList == null)
             throw new IllegalArgumentException("actors is null");
@@ -20,43 +20,43 @@ public class Group {
             throw new GroupTooSmallException();
     }
 
-    public Group(@Nonnull List<Actor> actors) throws GroupTooSmallException {
+    public Group(List<Actor> actors) throws GroupTooSmallException {
         this.actors = actors;
         if (actors.size() < 2)
             throw new GroupTooSmallException();
     }
 
-    public class GroupTooSmallException extends Exception {
+    public class GroupTooSmallException extends RuntimeException {
         public GroupTooSmallException() {
             super("Group too small");
         }
     }
 
-    public @Nonnull String getName() {
+    public String getName() {
         return listWithAnd(actors.stream().map(Actor::getName).toList());
     }
 
-    public @Nonnull GenderOrMultiple getGender() {
+    public GenderOrMultiple getGender() {
         return GenderOrMultiple.Multiple;
     }
 
-    public boolean looksAlike(@Nonnull HasAppearance item1, @Nonnull HasAppearance item2) {
+    public boolean looksAlike(HasAppearance item1, HasAppearance item2) {
         return actors.stream().anyMatch(a -> a.looksAlike(item1, item2));
     }
 
-    public boolean looksSimilar(@Nonnull HasAppearance item1, @Nonnull HasAppearance item2) {
+    public boolean looksSimilar(HasAppearance item1, HasAppearance item2) {
         return actors.stream().allMatch(a -> a.looksSimilar(item1, item2));
     }
 
-    public @Nonnull String getShortCased(@Nonnull Case c) {
+    public String getShortCased(Case c) {
         return listWithAnd(actors.stream().map(a -> a.getShortCased(c)).toList());
     }
 
-    public @Nonnull String getCased(@Nonnull Case c) {
+    public String getCased(Case c) {
         return listWithAnd(actors.stream().map(a -> a.getCased(c)).toList());
     }
 
-    private @Nonnull String listWithAnd(List<String> list) {
+    private String listWithAnd(List<String> list) {
         if (list.size() < 2)
             throw new IllegalArgumentException("List too small");
         

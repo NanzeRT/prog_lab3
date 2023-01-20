@@ -2,7 +2,7 @@ package lab3.models.common;
 
 import java.util.Set;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.actors.Sense;
 
@@ -17,7 +17,7 @@ public class Appearance {
         this.properties = properties;
     }
 
-    public @Nonnull Appearance merge(@Nonnull Appearance other) {
+    public Appearance merge(Appearance other) {
         Set<Property> newProperties = Set.copyOf(properties);
         newProperties.addAll(other.properties);
         return new Appearance(newProperties);
@@ -28,26 +28,22 @@ public class Appearance {
     }
 
     public boolean like(Appearance other, Sense judgingSense) {
-        return countSimmilarPropertiesPart(other, judgingSense) >= judgingSense.getPartOfSimmilarPropertiesToConsiderAlike();
+        return countSimmilarPropertiesPart(other) >= judgingSense.getPartOfSimmilarPropertiesToConsiderAlike();
     }
 
     public boolean similar(Appearance other, Sense judgingSense) {
-        return countSimmilarPropertiesPart(other, judgingSense) >= judgingSense.getPartOfSimmilarPropertiesToConsiderSimmilar();
+        return countSimmilarPropertiesPart(other) >= judgingSense.getPartOfSimmilarPropertiesToConsiderSimmilar();
     }
 
-    private float countSimmilarPropertiesPart(Appearance other, Sense judgingSense) {
-        var knownProperties = judgingSense.getKnownProperties();
+    private float countSimmilarPropertiesPart(Appearance other) {
 
-        knownProperties.retainAll(properties);
-        knownProperties.retainAll(other.properties);
-
-        var simmilarKnownPropertiesCount = knownProperties.stream()
-                .filter(properties::contains)
+        var simmilarPropertiesCount = properties.stream()
                 .filter(other.properties::contains)
                 .count();
         
-        var knownPropertiesCount = knownProperties.size();
+        var propertiesCount = properties.size() + other.properties.size();
+        
 
-        return (float) simmilarKnownPropertiesCount / knownPropertiesCount;
+        return (float) simmilarPropertiesCount / propertiesCount / 2;
     }
 }

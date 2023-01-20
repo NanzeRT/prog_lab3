@@ -1,31 +1,31 @@
 package lab3.models.text;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.common.Appearance;
 import lab3.models.text.interfaces.Adverb;
 
 public class SingleAdverb implements Adverb {
-    private final @Nonnull String adverb;
-    private final @Nonnull Appearance appearance;
+    private final String adverb;
+    private final Appearance appearance;
 
-    public SingleAdverb(@Nonnull String adverb) {
+    public SingleAdverb(String adverb) {
         this.adverb = adverb;
         this.appearance = new Appearance();
     }
 
-    public SingleAdverb(@Nonnull String adverb, @Nonnull Appearance appearance) {
+    public SingleAdverb(String adverb, Appearance appearance) {
         this.adverb = adverb;
         this.appearance = appearance;
     }
 
     @Override
-    public @Nonnull String getAdverb() {
+    public String getAdverb() {
         return adverb;
     }
 
     @Override
-    public @Nonnull Appearance getAppearance() {
+    public Appearance getAppearance() {
         return appearance;
     }
 

@@ -1,20 +1,18 @@
 package lab3.models.text;
 
-import javax.annotation.Nonnull;
-
 import lab3.models.text.interfaces.Direction;
 
 public class DirectionToName implements Direction {
-    private final @Nonnull Name name;
-    private final @Nonnull DirectionType directionType;
+    private final Name name;
+    private final DirectionType directionType;
 
-    public DirectionToName(@Nonnull Name name, @Nonnull DirectionType directionType) {
+    public DirectionToName(Name name, DirectionType directionType) {
         this.name = name;
         this.directionType = directionType;
     }
 
     @Override
-    public @Nonnull String getDirection() {
+    public String getDirection() {
         return directionType.getPreposition() + " " + name.getCased(directionType.getCaseAfter());
     }
 }

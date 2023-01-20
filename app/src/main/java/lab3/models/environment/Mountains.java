@@ -1,62 +1,42 @@
 package lab3.models.environment;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.common.Appearance;
 import lab3.models.common.Property;
 import lab3.models.text.Name;
 
-public class Mountains extends EnvinronmentObject {
-    private final @Nonnull Tops tops;
-    private final @Nonnull Slopes slopes;
+public class Mountains extends Environment {
+    private final MountainTops tops;
+    private final MountainSlopes slopes;
 
-    public class Tops extends EnvinronmentObject {
-        public Tops(@Nonnull Name name, @Nonnull Appearance appearance) {
-            super(name, appearance);
-        }
-
-        public Tops(@Nonnull Name name) {
-            super(name);
-        }
-    }
-
-    public class Slopes extends EnvinronmentObject {
-        public Slopes(@Nonnull Name name, @Nonnull Appearance appearance) {
-            super(name, appearance);
-        }
-
-        public Slopes(@Nonnull Name name) {
-            super(name);
-        }
-    }
-
-    public Mountains(@Nonnull Name name, @Nonnull Tops tops, @Nonnull Slopes slopes) {
+    public Mountains(Name name, MountainTops tops, MountainSlopes slopes) {
         super(name);
         this.tops = tops;
         this.slopes = slopes;
     }
 
-    public Mountains(@Nonnull Name name, @Nonnull Tops tops, @Nonnull Slopes slopes, @Nonnull Appearance appearance) {
+    public Mountains(Name name, MountainTops tops, MountainSlopes slopes, Appearance appearance) {
         super(name, appearance);
         this.tops = tops;
         this.slopes = slopes;
     }
 
-    public @Nonnull Tops getTops() {
+    public MountainTops getTops() {
         return tops;
     }
 
-    public @Nonnull Slopes getSlopes() {
+    public MountainSlopes getSlopes() {
         return slopes;
     }
 
     @Override
-    public @Nonnull Appearance getAppearance() {
+    public Appearance getAppearance() {
         return super.getAppearance().merge(tops.getAppearance()).merge(slopes.getAppearance());
     }
 
     @Override
-    protected @Nonnull Appearance defaultAppearance() {
+    protected Appearance defaultAppearance() {
         return new Appearance(Property.Giant, Property.Rocky, Property.Static);
     }
 

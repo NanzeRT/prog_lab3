@@ -1,7 +1,5 @@
 package lab3.models.text;
 
-import javax.annotation.Nonnull;
-
 public enum DirectionType {
     // "к" Case.ACCUSATIVE
     To("к", Case.ACCUSATIVE),
@@ -9,22 +7,20 @@ public enum DirectionType {
     From("из", Case.GENITIVE),
     // "по" Case.ACCUSATIVE
     Along("по", Case.ACCUSATIVE);
-    
 
-    
-    private final @Nonnull String preposition;
-    private final @Nonnull Case caseAfter;
+    private final String preposition;
+    private final Case caseAfter;
 
-    DirectionType(@Nonnull String preposition, @Nonnull Case caseAfter) {
+    DirectionType(String preposition, Case caseAfter) {
         this.preposition = preposition;
         this.caseAfter = caseAfter;
     }
 
-    public @Nonnull String getPreposition() {
+    public String getPreposition() {
         return preposition;
     }
 
-    public @Nonnull Case getCaseAfter() {
+    public Case getCaseAfter() {
         return caseAfter;
     }
 

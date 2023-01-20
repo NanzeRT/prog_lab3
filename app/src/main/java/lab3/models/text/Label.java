@@ -1,19 +1,19 @@
 package lab3.models.text;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.text.interfaces.HasCases;
 
 public class Label implements HasCases {
-    private final @Nonnull String name;
-    private final @Nonnull String genitive;
-    private final @Nonnull String dative;
-    private final @Nonnull String accusative;
-    private final @Nonnull String instrumental;
-    private final @Nonnull String prepositional;
+    private final String name;
+    private final String genitive;
+    private final String dative;
+    private final String accusative;
+    private final String instrumental;
+    private final String prepositional;
 
-    public Label(@Nonnull String name, @Nonnull String genitive, @Nonnull String dative,
-            @Nonnull String accusative, @Nonnull String instrumental, @Nonnull String prepositional) {
+    public Label(String name, String genitive, String dative,
+            String accusative, String instrumental, String prepositional) {
         this.name = name;
         this.genitive = genitive;
         this.dative = dative;
@@ -23,7 +23,7 @@ public class Label implements HasCases {
     }
 
     @Override
-    public @Nonnull String getCased(@Nonnull Case c) {
+    public String getCased(Case c) {
         return switch (c) {
             case NOMINATIVE -> name;
             case GENITIVE -> genitive;
@@ -35,7 +35,7 @@ public class Label implements HasCases {
         };
     }
 
-    public @Nonnull String getName() {
+    public String getName() {
         return name;
     }
 

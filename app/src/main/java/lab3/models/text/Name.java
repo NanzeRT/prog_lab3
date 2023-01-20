@@ -3,7 +3,7 @@ package lab3.models.text;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.common.Appearance;
 import lab3.models.common.interfaces.HasAppearance;
@@ -11,20 +11,20 @@ import lab3.models.text.interfaces.HasCases;
 import lab3.models.text.interfaces.Modifier;
 
 public class Name implements HasCases, HasAppearance {
-    private @Nonnull List<Modifier> modifiers = new ArrayList<>();
-    private @Nonnull Label name;
+    private List<Modifier> modifiers = new ArrayList<>();
+    private Label name;
 
-    public Name(@Nonnull Label name) {
+    public Name(Label name) {
         this.name = name;
     }
 
-    public @Nonnull Name addModifier(Modifier modifier) {
+    public Name addModifier(Modifier modifier) {
         modifiers.add(modifier);
         return this;
     }
 
     @Override
-    public @Nonnull Appearance getAppearance() {
+    public Appearance getAppearance() {
         Appearance appearance = new Appearance();
         for (Modifier m : modifiers)
             appearance = appearance.merge(m.getAppearance());
@@ -32,7 +32,7 @@ public class Name implements HasCases, HasAppearance {
     }
 
     @Override
-    public @Nonnull String getCased(@Nonnull Case c) {
+    public String getCased(Case c) {
         StringBuilder sb = new StringBuilder();
         for (Modifier m : modifiers) {
             sb.append(m.getCased(c));
@@ -45,7 +45,7 @@ public class Name implements HasCases, HasAppearance {
         return result;
     }
 
-    public @Nonnull String getShortCased(@Nonnull Case c) {
+    public String getShortCased(Case c) {
         return name.getCased(c);
     }
 

@@ -1,6 +1,6 @@
 package lab3.models.environment;
 
-import javax.annotation.Nonnull;
+
 
 import lab3.models.common.Appearance;
 import lab3.models.common.interfaces.HasAppearance;
@@ -8,41 +8,41 @@ import lab3.models.text.Case;
 import lab3.models.text.Name;
 import lab3.models.text.interfaces.Named;
 
-public abstract class EnvinronmentObject implements HasAppearance, Named {
-    protected final @Nonnull Name name;
-    protected final @Nonnull Appearance appearance;
+public abstract class Environment implements HasAppearance, Named {
+    protected final Name name;
+    protected final Appearance appearance;
 
-    public EnvinronmentObject(@Nonnull Name name, @Nonnull Appearance appearance) {
+    public Environment(Name name, Appearance appearance) {
         this.name = name;
         this.appearance = defaultAppearance().merge(appearance);
     }
 
-    public EnvinronmentObject(@Nonnull Name name) {
+    public Environment(Name name) {
         this.name = name;
         this.appearance = defaultAppearance();
     }
 
     @Override
-    public @Nonnull String getName() {
+    public String getName() {
         return name.getCased(Case.NOMINATIVE);
     }
 
     @Override
-    public @Nonnull String getCased(@Nonnull Case c) {
+    public String getCased(Case c) {
         return name.getCased(c);
     }
 
     @Override
-    public @Nonnull String getShortCased(@Nonnull Case c) {
+    public String getShortCased(Case c) {
         return name.getCased(c);
     }
 
     @Override
-    public @Nonnull Appearance getAppearance() {
+    public Appearance getAppearance() {
         return name.getAppearance().merge(appearance);
     }
 
-    protected @Nonnull Appearance defaultAppearance() {
+    protected Appearance defaultAppearance() {
         return new Appearance();
     }
 
@@ -60,7 +60,7 @@ public abstract class EnvinronmentObject implements HasAppearance, Named {
             return true;
         if (getClass() != obj.getClass())
             return false;
-        EnvinronmentObject other = (EnvinronmentObject) obj;
+        Environment other = (Environment) obj;
         return name.equals(other.name) && appearance.equals(other.appearance);
     }
 

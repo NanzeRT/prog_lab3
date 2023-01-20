@@ -3,16 +3,16 @@ package lab3.models.text;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+
 
 public class Text {
     private final List<Frase> text = new ArrayList<>();
 
-    public void addFrase(@Nonnull Frase frase) {
+    public void addFrase(Frase frase) {
         text.add(frase);
     }
 
-    public @Nonnull String getText() {
+    public String getText() {
         StringBuilder sb = new StringBuilder();
         for (Frase frase : text) {
             sb.append(frase.getFrase());
