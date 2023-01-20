@@ -39,22 +39,15 @@ public class SingleModifier implements Modifier {
 
     @Override
     public @Nonnull String getCased(@Nonnull Case c) {
-        switch (c) {
-            case NOMINATIVE:
-                return modifier;
-            case GENITIVE:
-                return genitive;
-            case DATIVE:
-                return dative;
-            case ACCUSATIVE:
-                return accusative;
-            case INSTRUMENTAL:
-                return instrumental;
-            case PREPOSITIONAL:
-                return prepositional;
-            default:
-                throw new IllegalArgumentException("Unknown case: " + c);
-        }
+        return switch (c) {
+            case NOMINATIVE -> modifier;
+            case GENITIVE -> genitive;
+            case DATIVE -> dative;
+            case ACCUSATIVE -> accusative;
+            case INSTRUMENTAL -> instrumental;
+            case PREPOSITIONAL -> prepositional;
+            default -> throw new IllegalArgumentException("Unknown case: " + c);
+        };
     }
 
     @Override

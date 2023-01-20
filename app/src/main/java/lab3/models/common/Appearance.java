@@ -31,7 +31,7 @@ public class Appearance {
         return countSimmilarPropertiesPart(other, judgingSense) >= judgingSense.getPartOfSimmilarPropertiesToConsiderAlike();
     }
 
-    public boolean simmilar(Appearance other, Sense judgingSense) {
+    public boolean similar(Appearance other, Sense judgingSense) {
         return countSimmilarPropertiesPart(other, judgingSense) >= judgingSense.getPartOfSimmilarPropertiesToConsiderSimmilar();
     }
 

@@ -2,6 +2,9 @@ package lab3.models.actors;
 
 import java.util.Set;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 import lab3.models.common.Property;
 
 public class Sense {
@@ -9,7 +12,10 @@ public class Sense {
     private float partOfSimmilarPropertiesToConsiderSimmilar;
     private final Set<Property> knownProperties;
 
-    public Sense(float partOfSimmilarPropertiesToConsiderAlike, float partOfSimmilarPropertiesToConsiderSimmilar, Set<Property> knownProperties) {
+    @Inject
+    public Sense(@Named("partToAlike") float partOfSimmilarPropertiesToConsiderAlike,
+            @Named("partToSimmilar") float partOfSimmilarPropertiesToConsiderSimmilar,
+            @Named("knownProperies") Set<Property> knownProperties) {
         this.partOfSimmilarPropertiesToConsiderAlike = partOfSimmilarPropertiesToConsiderAlike;
         this.partOfSimmilarPropertiesToConsiderSimmilar = partOfSimmilarPropertiesToConsiderSimmilar;
         this.knownProperties = knownProperties;
