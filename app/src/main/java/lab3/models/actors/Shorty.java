@@ -1,11 +1,13 @@
 package lab3.models.actors;
 
+import lab3.models.actions.interfaces.Action;
+import lab3.models.actions.results.ActionResult;
 import lab3.models.common.interfaces.HasAppearance;
 import lab3.models.text.Case;
 import lab3.models.text.GenderOrMultiple;
 import lab3.models.text.Name;
 
-public class Shorty implements Actor {
+public class Shorty implements AliveActor {
     private final Name name;
     private final Sense sense;
     private final GenderOrMultiple gender;
@@ -37,6 +39,11 @@ public class Shorty implements Actor {
     }
 
     @Override
+    public String getPronoun(Case c) {
+        return getGender().getPronoun().getCased(c);
+    }
+
+    @Override
     public boolean looksAlike(HasAppearance item1, HasAppearance item2) {
         return item1.getAppearance().like(item2.getAppearance(), sense);
     }
@@ -44,5 +51,10 @@ public class Shorty implements Actor {
     @Override
     public boolean looksSimilar(HasAppearance item1, HasAppearance item2) {
         return item1.getAppearance().similar(item2.getAppearance(), sense);
+    }
+
+    @Override
+    public ActionResult doAction(Action action) {
+        return action.execute(this);
     }
 }

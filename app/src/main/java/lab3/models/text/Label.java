@@ -1,7 +1,5 @@
 package lab3.models.text;
 
-
-
 import lab3.models.text.interfaces.HasCases;
 
 public class Label implements HasCases {
@@ -11,15 +9,17 @@ public class Label implements HasCases {
     private final String accusative;
     private final String instrumental;
     private final String prepositional;
+    private final GenderOrMultiple genderOrMultiple;
 
     public Label(String name, String genitive, String dative,
-            String accusative, String instrumental, String prepositional) {
+            String accusative, String instrumental, String prepositional, GenderOrMultiple genderOrMultiple) {
         this.name = name;
         this.genitive = genitive;
         this.dative = dative;
         this.accusative = accusative;
         this.instrumental = instrumental;
         this.prepositional = prepositional;
+        this.genderOrMultiple = genderOrMultiple;
     }
 
     @Override
@@ -39,6 +39,10 @@ public class Label implements HasCases {
         return name;
     }
 
+    public GenderOrMultiple getGender() {
+        return genderOrMultiple;
+    }
+
     @Override
     public String toString() {
         return "RussianName{" +
@@ -48,6 +52,7 @@ public class Label implements HasCases {
                 ", accusative='" + accusative + '\'' +
                 ", instrumental='" + instrumental + '\'' +
                 ", prepositional='" + prepositional + '\'' +
+                ", genderOrMultiple=" + genderOrMultiple +
                 '}';
     }
 
@@ -70,7 +75,11 @@ public class Label implements HasCases {
             return false;
         if (instrumental != null ? !instrumental.equals(that.instrumental) : that.instrumental != null)
             return false;
-        return prepositional != null ? prepositional.equals(that.prepositional) : that.prepositional == null;
+        if (prepositional != null ? !prepositional.equals(that.prepositional) : that.prepositional != null)
+            return false;
+        if (genderOrMultiple != that.genderOrMultiple)
+            return false;
+        return true;
     }
 
     @Override
@@ -81,6 +90,7 @@ public class Label implements HasCases {
         result = 31 * result + (accusative != null ? accusative.hashCode() : 0);
         result = 31 * result + (instrumental != null ? instrumental.hashCode() : 0);
         result = 31 * result + (prepositional != null ? prepositional.hashCode() : 0);
+        result = 31 * result + (genderOrMultiple != null ? genderOrMultiple.hashCode() : 0);
         return result;
     }
 }

@@ -1,32 +1,60 @@
 package lab3.models.environment;
 
-
-
 import lab3.models.common.Appearance;
 import lab3.models.common.Property;
 import lab3.models.text.Name;
 
 public class Mountains extends Environment {
-    private final MountainTops tops;
-    private final MountainSlopes slopes;
+    private final Tops tops;
+    private final Slopes slopes;
 
-    public Mountains(Name name, MountainTops tops, MountainSlopes slopes) {
+    public Mountains(Name name, Tops tops, Slopes slopes) {
         super(name);
         this.tops = tops;
         this.slopes = slopes;
     }
 
-    public Mountains(Name name, MountainTops tops, MountainSlopes slopes, Appearance appearance) {
+    public Mountains(Name name, Tops tops, Slopes slopes, Appearance appearance) {
         super(name, appearance);
         this.tops = tops;
         this.slopes = slopes;
     }
 
-    public MountainTops getTops() {
+    public static class Tops extends Environment {
+        public Tops(Name name, Appearance appearance) {
+            super(name, appearance);
+        }
+
+        public Tops(Name name) {
+            super(name);
+        }
+
+        @Override
+        protected Appearance defaultAppearance() {
+            return new Appearance(Property.Static, Property.Rocky);
+        }
+    }
+
+    public static class Slopes extends Environment {
+        public Slopes(Name name, Appearance appearance) {
+            super(name, appearance);
+        }
+
+        public Slopes(Name name) {
+            super(name);
+        }
+
+        @Override
+        protected Appearance defaultAppearance() {
+            return new Appearance(Property.Static, Property.Rocky);
+        }
+    }
+
+    public Tops getTops() {
         return tops;
     }
 
-    public MountainSlopes getSlopes() {
+    public Slopes getSlopes() {
         return slopes;
     }
 

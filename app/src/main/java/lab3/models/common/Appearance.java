@@ -28,22 +28,26 @@ public class Appearance {
     }
 
     public boolean like(Appearance other, Sense judgingSense) {
-        return countSimmilarPropertiesPart(other) >= judgingSense.getPartOfSimmilarPropertiesToConsiderAlike();
+        return countSimmilarPropertiesPart(other, judgingSense) >= judgingSense.getPartOfSimmilarPropertiesToConsiderAlike();
     }
 
     public boolean similar(Appearance other, Sense judgingSense) {
-        return countSimmilarPropertiesPart(other) >= judgingSense.getPartOfSimmilarPropertiesToConsiderSimmilar();
+        return countSimmilarPropertiesPart(other, judgingSense) >= judgingSense.getPartOfSimmilarPropertiesToConsiderSimmilar();
     }
 
-    private float countSimmilarPropertiesPart(Appearance other) {
+    private float countSimmilarPropertiesPart(Appearance other, Sense judgingSense) {
+        var knownProperties = judgingSense.getKnownProperties();
 
-        var simmilarPropertiesCount = properties.stream()
+        knownProperties.retainAll(properties);
+        knownProperties.retainAll(other.properties);
+
+        var simmilarKnownPropertiesCount = knownProperties.stream()
+                .filter(properties::contains)
                 .filter(other.properties::contains)
                 .count();
         
-        var propertiesCount = properties.size() + other.properties.size();
-        
+        var knownPropertiesCount = knownProperties.size();
 
-        return (float) simmilarPropertiesCount / propertiesCount / 2;
+        return (float) simmilarKnownPropertiesCount / knownPropertiesCount;
     }
 }

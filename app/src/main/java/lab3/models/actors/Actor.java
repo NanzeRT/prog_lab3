@@ -1,13 +1,14 @@
 package lab3.models.actors;
 
-import lab3.models.common.interfaces.HasAppearance;
+import lab3.models.actions.interfaces.Action;
+import lab3.models.actions.results.ActionResult;
+import lab3.models.text.Case;
 import lab3.models.text.GenderOrMultiple;
 import lab3.models.text.interfaces.Named;
 
 public interface Actor extends Named {
     GenderOrMultiple getGender();
+    String getPronoun(Case c);
 
-    boolean looksAlike(HasAppearance item1, HasAppearance item2);
-
-    boolean looksSimilar(HasAppearance item1, HasAppearance item2);
+    ActionResult doAction(Action action);
 }

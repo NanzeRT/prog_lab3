@@ -13,7 +13,7 @@ public class ModifierDictionary {
     public static final Modifier StonedMiddle = new SingleModifier("окаменевшее", "окаменевшего", "окаменевшему",
             "окаменевшее", "окаменевшим", "окаменевшем", new Appearance(Property.Rocky));
     public static final Modifier SharpenedMultiple = new SingleModifier("заострённые", "заострённых", "заострённым",
-            "заострённых", "заострёнными", "заострённых", new Appearance(Property.Sharp));
+            "заострённые", "заострёнными", "заострённых", new Appearance(Property.Sharp));
     public static final Modifier VauglyOutlinedMultiple = new SingleModifier("смутно очертанные", "смутно очертанных",
             "смутно очертанным", "смутно очертанные", "смутно очертанными", "смутно очертанных",
             new Appearance(Property.Flaffy));
