@@ -4,15 +4,15 @@ import org.itmo.prog.lab3.models.actions.interfaces.Action;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.common.interfaces.HasAppearance;
 import org.itmo.prog.lab3.models.text.Case;
-import org.itmo.prog.lab3.models.text.GenderOrMultiple;
+import org.itmo.prog.lab3.models.text.GenderOrPlural;
 import org.itmo.prog.lab3.models.text.Name;
 
 public class Shorty implements AliveActor {
     private final Name name;
     private final Sense sense;
-    private final GenderOrMultiple gender;
+    private final GenderOrPlural gender;
 
-    public Shorty(Name name, GenderOrMultiple gender, Sense sence) {
+    public Shorty(Name name, GenderOrPlural gender, Sense sence) {
         this.name = name;
         this.sense = sence;
         this.gender = gender;
@@ -34,7 +34,7 @@ public class Shorty implements AliveActor {
     }
 
     @Override
-    public GenderOrMultiple getGender() {
+    public GenderOrPlural getGender() {
         return gender;
     }
 

@@ -3,6 +3,8 @@ package org.itmo.prog.lab3;
 import org.itmo.prog.lab3.dictionaries.AdverbDictionary;
 import org.itmo.prog.lab3.dictionaries.LabelDicrionary;
 import org.itmo.prog.lab3.dictionaries.ModifierDictionary;
+import org.itmo.prog.lab3.models.actions.SweptAction;
+import org.itmo.prog.lab3.models.actions.formatters.DirectFormatter;
 import org.itmo.prog.lab3.models.actors.Group;
 import org.itmo.prog.lab3.models.actors.Sense;
 import org.itmo.prog.lab3.models.actors.Shorty;
@@ -11,14 +13,11 @@ import org.itmo.prog.lab3.models.environment.Sky;
 import org.itmo.prog.lab3.models.environment.Valley;
 import org.itmo.prog.lab3.models.scene.Scene;
 import org.itmo.prog.lab3.models.scene.Scene.SceneElementNotFoundException;
-import org.itmo.prog.lab3.models.text.Case;
 import org.itmo.prog.lab3.models.text.CompoundMidifier;
 import org.itmo.prog.lab3.models.text.Frase;
-import org.itmo.prog.lab3.models.text.GenderOrMultiple;
-import org.itmo.prog.lab3.models.text.Label;
+import org.itmo.prog.lab3.models.text.GenderOrPlural;
 import org.itmo.prog.lab3.models.text.Name;
 import org.itmo.prog.lab3.models.text.Text;
-import org.itmo.prog.lab3.utils.fluid_text.FluidActorFromLabel;
 import org.itmo.prog.lab3.utils.fluid_text.FluidText;
 
 public class App {
@@ -37,9 +36,9 @@ public class App {
     private static Text getStory() throws SceneElementNotFoundException {
         var scene = new Scene();
 
-        scene.addActor(new Shorty(new Name(LabelDicrionary.NameDunno), GenderOrMultiple.Male, new Sense()));
+        scene.addActor(new Shorty(new Name(LabelDicrionary.NameDunno), GenderOrPlural.Male, new Sense()));
 
-        scene.addActor(new Shorty(new Name(LabelDicrionary.NameDonut), GenderOrMultiple.Male, new Sense()));
+        scene.addActor(new Shorty(new Name(LabelDicrionary.NameDonut), GenderOrPlural.Male, new Sense()));
 
         scene.addActor(new Group(
                 scene.getActor(LabelDicrionary.NameDunno),
@@ -72,11 +71,11 @@ public class App {
         // Эти мысли с быстротой молнии пронеслись в голове у Незнайки.
         story.addFrase(new Frase(
                 FluidText.these(LabelDicrionary.Thoughts)
-                        .with(FluidText.fluid(LabelDicrionary.Fastness).of(LabelDicrionary.Lightning)).getCased(Case.NOMINATIVE)
-                        +
-                        " пронеслись в "
-                        +
-                        FluidText.fluid(LabelDicrionary.Head).inU(LabelDicrionary.NameDunno).getCased(Case.PREPOSITIONAL)));
+                        .with(FluidText.fluid(LabelDicrionary.Fastness).of(LabelDicrionary.Lightning))
+                        .doAction(new SweptAction())
+                        .in(FluidText.fluid(LabelDicrionary.Head)
+                                .inU(scene.getActor(LabelDicrionary.NameDunno)))
+                        .getTextByFormatter(new DirectFormatter())));
 
         // Но он не поддался страху.
         story.addFrase(new Frase("но он не поддался страху"));

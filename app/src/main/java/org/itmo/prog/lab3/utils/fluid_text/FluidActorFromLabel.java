@@ -1,7 +1,7 @@
 package org.itmo.prog.lab3.utils.fluid_text;
 
 import org.itmo.prog.lab3.models.text.Case;
-import org.itmo.prog.lab3.models.text.GenderOrMultiple;
+import org.itmo.prog.lab3.models.text.GenderOrPlural;
 import org.itmo.prog.lab3.models.text.Label;
 
 public class FluidActorFromLabel extends FluidActor {
@@ -12,7 +12,7 @@ public class FluidActorFromLabel extends FluidActor {
     }
 
     @Override
-    public GenderOrMultiple getGender() {
+    public GenderOrPlural getGender() {
         return label.getGender();
     }
 

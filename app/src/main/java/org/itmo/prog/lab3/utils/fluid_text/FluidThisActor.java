@@ -2,7 +2,7 @@ package org.itmo.prog.lab3.utils.fluid_text;
 
 import org.itmo.prog.lab3.models.actors.Actor;
 import org.itmo.prog.lab3.models.text.Case;
-import org.itmo.prog.lab3.models.text.GenderOrMultiple;
+import org.itmo.prog.lab3.models.text.GenderOrPlural;
 
 public class FluidThisActor extends FluidActorWithParent {
     public FluidThisActor(Actor parent) {
@@ -24,11 +24,11 @@ public class FluidThisActor extends FluidActorWithParent {
         return appendThis(parent.getCased(c), parent.getGender());
     }
 
-    private String appendThis(String s, GenderOrMultiple gender) {
+    private String appendThis(String s, GenderOrPlural gender) {
         return switch (gender) {
             case Male -> "этот " + s;
             case Female -> "эта " + s;
-            case Multiple -> "эти " + s;
+            case Plural -> "эти " + s;
             case Neuter -> "это " + s;
             default -> throw new IllegalStateException("Unexpected value: " + gender);
         };

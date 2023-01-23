@@ -6,7 +6,7 @@ import org.itmo.prog.lab3.models.common.Appearance;
 import org.itmo.prog.lab3.models.text.interfaces.Modifier;
 
 public class SingleModifier implements Modifier {
-    private final String modifier;
+    private final String nominative;
     private final String genitive;
     private final String dative;
     private final String accusative;
@@ -14,10 +14,10 @@ public class SingleModifier implements Modifier {
     private final String prepositional;
     private final Appearance appearance;
 
-    public SingleModifier(String modifier, String genitive, String dative,
+    public SingleModifier(String nominative, String genitive, String dative,
             String accusative, String instrumental, String prepositional,
             Appearance appearance) {
-        this.modifier = modifier;
+        this.nominative = nominative;
         this.genitive = genitive;
         this.dative = dative;
         this.accusative = accusative;
@@ -28,7 +28,7 @@ public class SingleModifier implements Modifier {
 
     public SingleModifier(String modifier, String genitive, String dative,
             String accusative, String instrumental, String prepositional) {
-        this.modifier = modifier;
+        this.nominative = modifier;
         this.genitive = genitive;
         this.dative = dative;
         this.accusative = accusative;
@@ -40,7 +40,7 @@ public class SingleModifier implements Modifier {
     @Override
     public String getCased(Case c) {
         return switch (c) {
-            case NOMINATIVE -> modifier;
+            case NOMINATIVE -> nominative;
             case GENITIVE -> genitive;
             case DATIVE -> dative;
             case ACCUSATIVE -> accusative;
@@ -58,7 +58,7 @@ public class SingleModifier implements Modifier {
     @Override
     public String toString() {
         return "Modifier{" +
-                "modifier='" + modifier + '\'' +
+                "nominative='" + nominative + '\'' +
                 ", genitive='" + genitive + '\'' +
                 ", dative='" + dative + '\'' +
                 ", accusative='" + accusative + '\'' +
@@ -76,7 +76,7 @@ public class SingleModifier implements Modifier {
 
         SingleModifier modifier1 = (SingleModifier) o;
 
-        if (modifier != null ? !modifier.equals(modifier1.modifier) : modifier1.modifier != null)
+        if (nominative != null ? !nominative.equals(modifier1.nominative) : modifier1.nominative != null)
             return false;
         if (genitive != null ? !genitive.equals(modifier1.genitive) : modifier1.genitive != null)
             return false;
@@ -91,7 +91,7 @@ public class SingleModifier implements Modifier {
 
     @Override
     public int hashCode() {
-        int result = modifier != null ? modifier.hashCode() : 0;
+        int result = nominative != null ? nominative.hashCode() : 0;
         result = 31 * result + (genitive != null ? genitive.hashCode() : 0);
         result = 31 * result + (dative != null ? dative.hashCode() : 0);
         result = 31 * result + (accusative != null ? accusative.hashCode() : 0);

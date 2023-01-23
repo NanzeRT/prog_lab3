@@ -9,3 +9,6 @@ build
 
 # Ignore Java compiled files
 *.class
+
+# Ignore IntelliJ files
+.idea

@@ -1,6 +1,5 @@
 package org.itmo.prog.lab3;
 
-import org.itmo.prog.lab3.App;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.ByteArrayOutputStream;

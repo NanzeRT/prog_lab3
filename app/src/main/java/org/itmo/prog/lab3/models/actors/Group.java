@@ -5,7 +5,7 @@ import java.util.List;
 import org.itmo.prog.lab3.models.actions.interfaces.Action;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.text.Case;
-import org.itmo.prog.lab3.models.text.GenderOrMultiple;
+import org.itmo.prog.lab3.models.text.GenderOrPlural;
 
 public class Group implements Actor {
     private List<Actor> actors;
@@ -37,8 +37,8 @@ public class Group implements Actor {
     }
 
     @Override
-    public GenderOrMultiple getGender() {
-        return GenderOrMultiple.Multiple;
+    public GenderOrPlural getGender() {
+        return GenderOrPlural.Plural;
     }
 
     @Override
