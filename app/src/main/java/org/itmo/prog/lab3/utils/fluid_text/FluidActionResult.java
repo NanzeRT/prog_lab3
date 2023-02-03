@@ -7,4 +7,12 @@ public abstract class FluidActionResult extends ActionResult {
     public FluidActionResult in(HasCases thing) {
         return new FluidActionResultIn(this, thing);
     }
+
+    public FluidActionResult using(HasCases thing) {
+        return new FluidActionResultUsing(this, thing);
+    }
+
+    public FluidActionResult forr(HasCases thing) {
+        return new FluidActionResultFor(this, thing);
+    }
 }

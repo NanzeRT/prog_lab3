@@ -19,4 +19,7 @@ public class ModifierDictionary {
             new Appearance(Property.Flaffy));
     public static final Modifier FluffyFemale = new SingleModifier("пушистая", "пушистой", "пушистой", "пушистую",
             "пушистой", "пушистой", new Appearance(Property.Flaffy));
+    public static final Modifier OneFemale = new SingleModifier("одна", "одной", "одной", "одну", "одной", "одной");
+    public static final Modifier OtherFemale = new SingleModifier("другая", "другой", "другой", "другую", "другой",
+            "другой");
 }

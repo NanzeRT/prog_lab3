@@ -26,4 +26,28 @@ public class Frase {
     public Frase comma(String frase) {
         return new Frase(this.frase + ", " + frase);
     }
+
+    public Frase but(String frase) {
+        if (this.frase.isEmpty())
+            return new Frase("но " + frase);
+        return new Frase(this.frase + ", но " + frase);
+    }
+
+    public Frase asIf(String frase) {
+        if (this.frase.isEmpty())
+            return new Frase("как бы " + frase);
+        return new Frase(this.frase + ", как бы " + frase);
+    }
+
+    public Frase a(String frase) {
+        if (this.frase.isEmpty())
+            return new Frase("а " + frase);
+        return new Frase(this.frase + ", а " + frase);
+    }
+
+    public Frase as(String frase) {
+        if (this.frase.isEmpty())
+            return new Frase("как " + frase);
+        return new Frase(this.frase + ", как " + frase);
+    }
 }

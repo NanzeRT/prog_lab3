@@ -15,18 +15,29 @@ public abstract class BasicAction implements Action {
 
     @Override
     public ActionResult execute(AliveActor aliveActor) {
-        return execute((Actor)aliveActor);
+        return execute((Actor) aliveActor);
     }
-    
+
     @Override
     public ActionResult execute(Shorty shorty) {
-        return execute((AliveActor)shorty);
+        return execute((AliveActor) shorty);
     }
-    
+
     @Override
     public ActionResult execute(Group group) {
-        return execute((Actor)group);
+        return execute((Actor) group);
     }
-    
-    protected abstract Action fallbackAction();
+
+    public static class CanNotBeFaledException extends AssertionError {
+        public CanNotBeFaledException() {
+            super("Action can not be failed");
+        }
+    }
+
+    /**
+     * This method should be overriden if execute(Actor) method is not
+     */
+    protected Action fallbackAction() {
+        throw new CanNotBeFaledException();
+    }
 }

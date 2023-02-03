@@ -1,17 +1,22 @@
 package org.itmo.prog.lab3.models.actions;
 
-import org.itmo.prog.lab3.dictionaries.VerbDictionary;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.actors.Actor;
 import org.itmo.prog.lab3.models.text.Verb;
 
-public class SweptAction extends BasicAction {
+public class ActionFromVerb extends BasicAction {
+    private Verb verb;
+
+    public ActionFromVerb(Verb verb) {
+        this.verb = verb;
+    }
+
     @Override
     public ActionResult execute(Actor actor) {
         return new ActionResult() {
             @Override
             public String getTextWithoutActor() {
-                return VerbDictionary.Raced.getForm(actor.getGender());
+                return verb.getForm(actor.getGender());
             }
 
             @Override
@@ -21,7 +26,7 @@ public class SweptAction extends BasicAction {
 
             @Override
             public Verb.TimeForm getTime() {
-                return VerbDictionary.Raced.getTime();
+                return verb.getTime();
             }
         };
     }

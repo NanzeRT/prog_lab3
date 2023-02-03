@@ -4,14 +4,21 @@ import org.itmo.prog.lab3.dictionaries.VerbDictionary;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.actors.Actor;
 import org.itmo.prog.lab3.models.text.Verb;
+import org.itmo.prog.lab3.models.text.interfaces.HasCases;
 
-public class SweptAction extends BasicAction {
+public class DidntSuccumbedAction extends BasicAction {
+    private final HasCases thingToSuccumb;
+
+    public DidntSuccumbedAction(HasCases thingToSuccumb) {
+        this.thingToSuccumb = thingToSuccumb;
+    }
+
     @Override
     public ActionResult execute(Actor actor) {
         return new ActionResult() {
             @Override
             public String getTextWithoutActor() {
-                return VerbDictionary.Raced.getForm(actor.getGender());
+                return "не " + VerbDictionary.Succumbed.getForm(actor.getGender()) + " " + thingToSuccumb.getCased(VerbDictionary.Succumbed.getTargetCase());
             }
 
             @Override
@@ -21,7 +28,7 @@ public class SweptAction extends BasicAction {
 
             @Override
             public Verb.TimeForm getTime() {
-                return VerbDictionary.Raced.getTime();
+                return VerbDictionary.Succumbed.getTime();
             }
         };
     }

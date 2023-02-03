@@ -3,8 +3,14 @@ package org.itmo.prog.lab3;
 import org.itmo.prog.lab3.dictionaries.AdverbDictionary;
 import org.itmo.prog.lab3.dictionaries.LabelDicrionary;
 import org.itmo.prog.lab3.dictionaries.ModifierDictionary;
+import org.itmo.prog.lab3.models.actions.DidntSuccumbedAction;
+import org.itmo.prog.lab3.models.actions.HuggedAction;
+import org.itmo.prog.lab3.models.actions.PressedAction;
 import org.itmo.prog.lab3.models.actions.SweptAction;
+import org.itmo.prog.lab3.models.actions.WantingToCheerUpAction;
 import org.itmo.prog.lab3.models.actions.formatters.DirectFormatter;
+import org.itmo.prog.lab3.models.actions.formatters.NoNameFormatter;
+import org.itmo.prog.lab3.models.actions.formatters.PronounDirectFormatter;
 import org.itmo.prog.lab3.models.actors.Group;
 import org.itmo.prog.lab3.models.actors.Sense;
 import org.itmo.prog.lab3.models.actors.Shorty;
@@ -74,19 +80,36 @@ public class App {
                         .with(FluidText.fluid(LabelDicrionary.Fastness).of(LabelDicrionary.Lightning))
                         .doAction(new SweptAction())
                         .in(FluidText.fluid(LabelDicrionary.Head)
-                                .inU(scene.getActor(LabelDicrionary.NameDunno)))
+                                .inU(scene.getMainActor()))
                         .getTextByFormatter(new DirectFormatter())));
 
         // Но он не поддался страху.
-        story.addFrase(new Frase("но он не поддался страху"));
+        story.addFrase(new Frase().but(
+                FluidText.fluid(scene.getMainActor())
+                        .doAction(new DidntSuccumbedAction(LabelDicrionary.Fear))
+                        .getTextByFormatter(new PronounDirectFormatter())));
 
         // Как бы желая подбодрить Пончика, он обнял его одной рукой за плечо, а другой
         // рукой нажал кнопку у двери.
-        story.addFrase(new Frase(
-                "как бы желая подбодрить Пончика, он обнял его одной рукой за плечо, а другой рукой нажал кнопку у двери"));
+        story.addFrase(new Frase().asIf(
+                FluidText.fluid(scene.getMainActor())
+                        .doAction(new WantingToCheerUpAction(scene.getActor(LabelDicrionary.NameDonut)))
+                        .getTextByFormatter(new NoNameFormatter()))
+                .comma(FluidText.fluid(scene.getMainActor())
+                        .doAction(new HuggedAction(FluidText.pronoun(scene.getActor(LabelDicrionary.NameDonut))))
+                        .using(new Name(LabelDicrionary.Hand).addModifier(ModifierDictionary.OneFemale))
+                        .forr(LabelDicrionary.Shoulder)
+                        .getTextByFormatter(new PronounDirectFormatter()))
+                .a(FluidText.using(new Name(LabelDicrionary.Hand).addModifier(ModifierDictionary.OtherFemale),
+                        FluidText.fluid(scene.getMainActor())
+                                .doAction(new PressedAction(FluidText.fluid(LabelDicrionary.Button)
+                                        .inU(FluidText.fluid(LabelDicrionary.Door)))))
+                        .getTextByFormatter(new NoNameFormatter())));
 
         // Но дверь не открылась, как ожидал Незнайка.
-        story.addFrase(new Frase("но дверь не открылась, как ожидал Незнайка"));
+        story.addFrase(new Frase().but(
+                "дверь не открылась")
+                .as("ожидал Незнайка"));
 
         // Открылось лишь крошечное отверстие, имевшееся в двери.
         story.addFrase(new Frase("открылось лишь крошечное отверстие, имевшееся в двери"));

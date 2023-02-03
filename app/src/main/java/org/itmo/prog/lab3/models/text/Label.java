@@ -1,12 +1,12 @@
 package org.itmo.prog.lab3.models.text;
 
 public class Label extends CasedWord {
-    private final GenderOrPlural genderOrMultiple;
+    private final GenderOrPlural genderOrPlural;
 
     public Label(String nominative, String genitive, String dative,
-            String accusative, String instrumental, String prepositional, GenderOrPlural genderOrMultiple) {
+            String accusative, String instrumental, String prepositional, GenderOrPlural genderOrPlural) {
         super(nominative, genitive, dative, accusative, instrumental, prepositional);
-        this.genderOrMultiple = genderOrMultiple;
+        this.genderOrPlural = genderOrPlural;
     }
 
     public String getName() {
@@ -14,7 +14,7 @@ public class Label extends CasedWord {
     }
 
     public GenderOrPlural getGender() {
-        return genderOrMultiple;
+        return genderOrPlural;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Label extends CasedWord {
                 ", accusative='" + accusative + '\'' +
                 ", instrumental='" + instrumental + '\'' +
                 ", prepositional='" + prepositional + '\'' +
-                ", genderOrMultiple=" + genderOrMultiple +
+                ", genderOrPlural=" + genderOrPlural +
                 '}';
     }
 
@@ -40,7 +40,7 @@ public class Label extends CasedWord {
 
         Label that = (Label) o;
 
-        if (genderOrMultiple != that.genderOrMultiple)
+        if (genderOrPlural != that.genderOrPlural)
             return false;
         return true;
     }
@@ -53,7 +53,7 @@ public class Label extends CasedWord {
         result = 31 * result + (accusative != null ? accusative.hashCode() : 0);
         result = 31 * result + (instrumental != null ? instrumental.hashCode() : 0);
         result = 31 * result + (prepositional != null ? prepositional.hashCode() : 0);
-        result = 31 * result + (genderOrMultiple != null ? genderOrMultiple.hashCode() : 0);
+        result = 31 * result + (genderOrPlural != null ? genderOrPlural.hashCode() : 0);
         return result;
     }
 }

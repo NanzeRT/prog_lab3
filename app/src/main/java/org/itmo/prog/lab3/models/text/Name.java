@@ -47,6 +47,10 @@ public class Name implements HasCases, HasAppearance {
         return name.getCased(c);
     }
 
+    public GenderOrPlural getGender() {
+        return name.getGender();
+    }
+
     @Override
     public String toString() {
         return "Name{" +

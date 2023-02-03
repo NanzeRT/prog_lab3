@@ -27,4 +27,8 @@ public abstract class FluidActor implements Actor {
     public FluidActor inU(HasCases thing) {
         return new FluidActorInU(this, thing);
     }
+
+    public FluidActor pronoun() {
+        return new FluidActorPronoun(this);
+    }
 }
