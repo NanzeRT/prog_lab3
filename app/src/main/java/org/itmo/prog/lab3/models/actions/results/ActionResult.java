@@ -14,4 +14,8 @@ public abstract class ActionResult {
     public String getTextByFormatter(ActionResultFormatter formatter) {
         return formatter.format(this);
     }
+
+    public boolean isSucceded () {
+        return true;
+    }
 }

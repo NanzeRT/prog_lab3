@@ -12,7 +12,7 @@ public class ReverseFormatter extends ActionResultFormatter {
             case FUTURE:
                 return result.getTextWithoutActor() + " " + result.getActor().getCased(Case.NOMINATIVE);
             default:
-                throw new IllegalArgumentException("Unknown time form");
+                throw new FormatterTimeException("Unknown time: " + result.getTime());
         }
     }
 }

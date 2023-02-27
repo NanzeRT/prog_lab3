@@ -50,4 +50,10 @@ public class Frase {
             return new Frase("как " + frase);
         return new Frase(this.frase + ", как " + frase);
     }
+
+    public Frase and(String frase) {
+        if (this.frase.isEmpty())
+            return new Frase("и " + frase);
+        return new Frase(this.frase + ", и " + frase);
+    }
 }

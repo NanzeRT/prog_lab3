@@ -8,11 +8,19 @@ public abstract class FluidActionResult extends ActionResult {
         return new FluidActionResultIn(this, thing);
     }
 
+    public FluidActionResult inU(HasCases thing) {
+        return new FluidActionResultInU(this, thing);
+    }
+
     public FluidActionResult using(HasCases thing) {
         return new FluidActionResultUsing(this, thing);
     }
 
     public FluidActionResult forr(HasCases thing) {
         return new FluidActionResultFor(this, thing);
+    }
+
+    public FluidActionResult behindReversed(HasCases thing) {
+        return new FluidActionResultBehindReversed(this, thing);
     }
 }

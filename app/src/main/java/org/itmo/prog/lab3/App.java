@@ -3,17 +3,31 @@ package org.itmo.prog.lab3;
 import org.itmo.prog.lab3.dictionaries.AdverbDictionary;
 import org.itmo.prog.lab3.dictionaries.LabelDicrionary;
 import org.itmo.prog.lab3.dictionaries.ModifierDictionary;
+import org.itmo.prog.lab3.dictionaries.VerbDictionary;
+import org.itmo.prog.lab3.models.actions.ActionWithTargetFromVerb;
+import org.itmo.prog.lab3.models.actions.ComparedAlikeAction;
+import org.itmo.prog.lab3.models.actions.DidntOpenedItselfAction;
 import org.itmo.prog.lab3.models.actions.DidntSuccumbedAction;
+import org.itmo.prog.lab3.models.actions.ExpectedAction;
 import org.itmo.prog.lab3.models.actions.HuggedAction;
+import org.itmo.prog.lab3.models.actions.OpenedItselfAction;
+import org.itmo.prog.lab3.models.actions.PiledUpAction;
 import org.itmo.prog.lab3.models.actions.PressedAction;
+import org.itmo.prog.lab3.models.actions.SoaredUpAction;
 import org.itmo.prog.lab3.models.actions.SweptAction;
 import org.itmo.prog.lab3.models.actions.WantingToCheerUpAction;
+import org.itmo.prog.lab3.models.actions.WasAvailableAction;
 import org.itmo.prog.lab3.models.actions.formatters.DirectFormatter;
 import org.itmo.prog.lab3.models.actions.formatters.NoNameFormatter;
 import org.itmo.prog.lab3.models.actions.formatters.PronounDirectFormatter;
+import org.itmo.prog.lab3.models.actions.formatters.ReverseFormatter;
+import org.itmo.prog.lab3.models.actions.formatters.ReverseFormatterWithInsert;
+import org.itmo.prog.lab3.models.actions.results.ActionResultBinary;
 import org.itmo.prog.lab3.models.actors.Group;
 import org.itmo.prog.lab3.models.actors.Sense;
 import org.itmo.prog.lab3.models.actors.Shorty;
+import org.itmo.prog.lab3.models.common.Appearance;
+import org.itmo.prog.lab3.models.common.Property;
 import org.itmo.prog.lab3.models.environment.Mountains;
 import org.itmo.prog.lab3.models.environment.Sky;
 import org.itmo.prog.lab3.models.environment.Valley;
@@ -51,6 +65,13 @@ public class App {
                 scene.getActor(LabelDicrionary.NameDonut)));
 
         scene.setMainActor(LabelDicrionary.NameDunno.getName());
+
+        scene.addEnvinronment(new Mountains(
+                new Name(LabelDicrionary.Mountains).addModifier(
+                        new CompoundMidifier(AdverbDictionary.Brightly, ModifierDictionary.RedMultiple)),
+                new Mountains.Tops(
+                        new Name(LabelDicrionary.Tops)),
+                new Mountains.Slopes(new Name(LabelDicrionary.Slopes))));
 
         scene.addEnvinronment(new Mountains(
                 new Name(LabelDicrionary.Mountains).addModifier(
@@ -108,17 +129,36 @@ public class App {
 
         // Но дверь не открылась, как ожидал Незнайка.
         story.addFrase(new Frase().but(
-                "дверь не открылась")
-                .as("ожидал Незнайка"));
+                FluidText.fluid(LabelDicrionary.Door)
+                        .doAction(new DidntOpenedItselfAction())
+                        .getTextByFormatter(new DirectFormatter()))
+                .as(FluidText.fluid(scene.getMainActor())
+                        .doAction(new ExpectedAction())
+                        .getTextByFormatter(new ReverseFormatter())));
+
+        var littleHole = FluidText.fluid(new Name(LabelDicrionary.Hole).addModifier(ModifierDictionary.LittleNeuter));
 
         // Открылось лишь крошечное отверстие, имевшееся в двери.
-        story.addFrase(new Frase("открылось лишь крошечное отверстие, имевшееся в двери"));
+        story.addFrase(new Frase(
+                littleHole.doAction(new OpenedItselfAction())
+                        .getTextByFormatter(new ReverseFormatterWithInsert("лишь")))
+                .comma(littleHole.doAction(new WasAvailableAction())
+                        .in(FluidText.fluid(LabelDicrionary.Door))
+                        .getTextByFormatter(new NoNameFormatter())));
 
         // Пространство внутри шлюза соединилось с наружным безвоздушным пространством,
         // и воздух, находившийся в шлюзовой камере, со свистом начал вырываться на
         // свободу.
         story.addFrase(new Frase(
-                "пространство внутри шлюза соединилось с наружным безвоздушным пространством, и воздух, находившийся в шлюзовой камере, со свистом начал вырываться на свободу"));
+                FluidText.fluid(LabelDicrionary.Space)
+                        .inside(LabelDicrionary.Gateway)
+                        .doAction(new ActionWithTargetFromVerb(VerbDictionary.ConnectedWith,
+                                FluidText.fluid(new Name(LabelDicrionary.Space)
+                                        .addModifier(ModifierDictionary.OuterNeuter)
+                                        .addModifier(ModifierDictionary.AirlessNeuter))))
+                        .getTextByFormatter(new DirectFormatter()))
+                // region
+                .and("воздух, находившийся в шлюзовой камере, со свистом начал вырываться на свободу"));
 
         // Незнайка и Пончик почувствовали, что комбинезоны, которые прежде плотно
         // прилегали к телу, вдруг начали становиться просторнее, словно раздувались.
@@ -167,13 +207,36 @@ public class App {
 
         // Они были желтые, словно песчаные.
         story.addFrase(new Frase("Они были желтые, словно песчаные"));
+        // endregion
 
         // За холмами громоздились ярко-красные горы.
-        story.addFrase(new Frase("За холмами громоздились ярко-красные горы"));
+        story.addFrase(new Frase(
+                FluidText.fluid(scene.getEnvinronment("ярко-красные горы"))
+                        .doAction(new PiledUpAction())
+                        .behindReversed(LabelDicrionary.Hills)
+                        .getTextByFormatter(new ReverseFormatter())));
 
-        // Они, словно языки застывшего пламени, взмывали кверху.
-        story.addFrase(new Frase("Они, словно языки застывшего пламени, взмывали кверху"));
+        {
+            var flameTongues = FluidText.fluid(LabelDicrionary.Tongues)
+                    .of(FluidText.fluid(new Name(LabelDicrionary.Flame).addModifier(ModifierDictionary.FrozenNeuter),
+                            new Appearance(Property.Red, Property.Bright)));
 
+            var comparisonResult = (ActionResultBinary) scene.getMainActor()
+                    .doAction(new ComparedAlikeAction(scene.getEnvinronment("ярко-красные горы"), flameTongues));
+
+            if (!comparisonResult.isPositive())
+                throw new RuntimeException(scene.getEnvinronment("ярко-красные горы").getName() + " не похожи на "
+                        + flameTongues.getName());
+
+            // Они, словно языки застывшего пламени, взмывали кверху.
+            story.addFrase(new Frase(
+                    FluidText.fluid(scene.getEnvinronment("ярко-красные горы"))
+                            .alike(flameTongues)
+                            .doAction(new SoaredUpAction())
+                            .getTextByFormatter(new PronounDirectFormatter())));
+        }
+
+        // region
         // По правую руку, невдалеке от наших путешественников, были такие же
         // огненно-красные горы.
         story.addFrase(
@@ -268,6 +331,8 @@ public class App {
         // покорно пошел за Незнайкой.
         story.addFrase(new Frase(
                 "Увидев, что он уже опоздал высказать свое мнение, Пончик развел руками и покорно пошел за Незнайкой"));
+
+        // endregion
 
         return story;
     }

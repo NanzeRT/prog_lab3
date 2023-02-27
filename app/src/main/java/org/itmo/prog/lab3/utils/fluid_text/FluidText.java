@@ -2,6 +2,7 @@ package org.itmo.prog.lab3.utils.fluid_text;
 
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.actors.Actor;
+import org.itmo.prog.lab3.models.common.Appearance;
 import org.itmo.prog.lab3.models.text.Label;
 import org.itmo.prog.lab3.models.text.Name;
 import org.itmo.prog.lab3.models.text.interfaces.HasCases;
@@ -24,8 +25,16 @@ public class FluidText {
         return new FluidActorFromName(parent);
     }
 
+    public static FluidActor fluid(Name parent, Appearance appearance) {
+        return new FluidActorFromName(parent, appearance);
+    }
+
     public static FluidActor fluid(Label parent) {
         return new FluidActorFromLabel(parent);
+    }
+
+    public static FluidActor fluid(Label parent, Appearance appearance) {
+        return new FluidActorFromLabel(parent, appearance);
     }
 
     public static FluidActor pronoun(Actor parent) {

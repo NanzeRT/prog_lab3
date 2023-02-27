@@ -6,6 +6,7 @@ public enum Property {
     Red,
     Mountain,
     Giant,
+    Small,
     Glassy,
     Rocky,
     Sharp,

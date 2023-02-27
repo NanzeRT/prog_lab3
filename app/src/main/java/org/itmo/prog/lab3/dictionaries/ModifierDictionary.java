@@ -22,4 +22,12 @@ public class ModifierDictionary {
     public static final Modifier OneFemale = new SingleModifier("одна", "одной", "одной", "одну", "одной", "одной");
     public static final Modifier OtherFemale = new SingleModifier("другая", "другой", "другой", "другую", "другой",
             "другой");
+    public static final Modifier LittleNeuter = new SingleModifier("крошечное", "крошечного", "крошечному", "крошечное",
+            "крошечным", "крошечном", new Appearance(Property.Small));
+    public static final Modifier OuterNeuter = new SingleModifier("наружное", "наружного", "наружному", "наружное",
+            "наружным", "наружном");
+    public static final Modifier AirlessNeuter = new SingleModifier("безвоздушное", "бузвоздушного", "безвоздушному",
+            "безвоздушное", "безвоздушным", "безвоздушном");
+    public static final Modifier FrozenNeuter = new SingleModifier("застывшее", "застывшего", "застывшему", "застывшее",
+            "застывшим", "застывшем", new Appearance(Property.Static));
 }

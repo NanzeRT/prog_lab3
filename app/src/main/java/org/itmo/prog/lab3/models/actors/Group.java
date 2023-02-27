@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.itmo.prog.lab3.models.actions.interfaces.Action;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
+import org.itmo.prog.lab3.models.common.Appearance;
 import org.itmo.prog.lab3.models.text.Case;
 import org.itmo.prog.lab3.models.text.GenderOrPlural;
 
@@ -76,5 +77,14 @@ public class Group implements Actor {
     @Override
     public ActionResult doAction(Action action) {
         return action.execute(this);
+    }
+
+    @Override
+    public Appearance getAppearance() {
+        Appearance result = new Appearance();
+        for (var actor : actors) {
+            result = result.merge(actor.getAppearance());
+        }
+        return result;
     }
 }

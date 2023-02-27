@@ -2,9 +2,10 @@ package org.itmo.prog.lab3.models.text;
 
 public class VerbWithTarget extends Verb {
     private final Case targetCase;
-
-    public VerbWithTarget(String firstPersonSingular, String secondPersonSingular, String thirdPersonSingular, String plural, String gerund, String infinitive, TimeForm time, Case targetCase) {
-        super(firstPersonSingular, secondPersonSingular, thirdPersonSingular, plural, gerund, infinitive, time);
+    
+    public VerbWithTarget(String maleForm, String femaleForm, String neuterForm, String pluralForm, String gerund,
+            String infinitive, TimeForm timeForm, Case targetCase) {
+        super(maleForm, femaleForm, neuterForm, pluralForm, gerund, infinitive, timeForm);
         this.targetCase = targetCase;
     }
 

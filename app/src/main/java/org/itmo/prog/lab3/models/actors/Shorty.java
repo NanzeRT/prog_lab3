@@ -2,6 +2,7 @@ package org.itmo.prog.lab3.models.actors;
 
 import org.itmo.prog.lab3.models.actions.interfaces.Action;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
+import org.itmo.prog.lab3.models.common.Appearance;
 import org.itmo.prog.lab3.models.common.interfaces.HasAppearance;
 import org.itmo.prog.lab3.models.text.Case;
 import org.itmo.prog.lab3.models.text.GenderOrPlural;
@@ -56,5 +57,10 @@ public class Shorty implements AliveActor {
     @Override
     public ActionResult doAction(Action action) {
         return action.execute(this);
+    }
+
+    @Override
+    public Appearance getAppearance() {
+        return name.getAppearance();
     }
 }

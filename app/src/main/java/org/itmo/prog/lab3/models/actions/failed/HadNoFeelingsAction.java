@@ -25,11 +25,16 @@ public class HadNoFeelingsAction extends BasicAction {
             public Verb.TimeForm getTime() {
                 return Verb.TimeForm.PAST;
             }
+            
+                @Override
+                public boolean isSucceded() {
+                    return false;
+                }
         };
     }
 
     @Override
-    protected Action fallbackAction() {
+    protected Action getFallbackAction() {
         throw new AssertionError();
     }
 }

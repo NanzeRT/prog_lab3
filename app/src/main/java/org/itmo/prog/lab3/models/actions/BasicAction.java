@@ -10,7 +10,7 @@ import org.itmo.prog.lab3.models.actors.Shorty;
 public abstract class BasicAction implements Action {
     @Override
     public ActionResult execute(Actor actor) {
-        return actor.doAction(fallbackAction());
+        return actor.doAction(getFallbackAction());
     }
 
     @Override
@@ -28,8 +28,8 @@ public abstract class BasicAction implements Action {
         return execute((Actor) group);
     }
 
-    public static class CanNotBeFaledException extends AssertionError {
-        public CanNotBeFaledException() {
+    public static class CanNotBeFailedException extends AssertionError {
+        public CanNotBeFailedException() {
             super("Action can not be failed");
         }
     }
@@ -37,7 +37,7 @@ public abstract class BasicAction implements Action {
     /**
      * This method should be overriden if execute(Actor) method is not
      */
-    protected Action fallbackAction() {
-        throw new CanNotBeFaledException();
+    protected Action getFallbackAction() {
+        throw new CanNotBeFailedException();
     }
 }

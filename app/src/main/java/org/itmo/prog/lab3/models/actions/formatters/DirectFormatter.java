@@ -12,7 +12,7 @@ public class DirectFormatter extends ActionResultFormatter {
             case FUTURE:
                 return result.getActor().getCased(Case.NOMINATIVE) + " " + result.getTextWithoutActor();
             default:
-                throw new IllegalArgumentException("Unknown time form");
+                throw new FormatterTimeException("Unknown time: " + result.getTime());
         }
     }
 }

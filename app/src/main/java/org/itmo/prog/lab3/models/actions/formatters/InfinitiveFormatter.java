@@ -9,7 +9,7 @@ public class InfinitiveFormatter extends ActionResultFormatter {
             case INFINITIVE:
                 return result.getTextWithoutActor();
             default:
-                throw new IllegalArgumentException("Unknown time form");
+                throw new FormatterTimeException("Unknown time: " + result.getTime());
         }
     }
 }

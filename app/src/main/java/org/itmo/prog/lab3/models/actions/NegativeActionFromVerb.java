@@ -4,11 +4,9 @@ import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.actors.Actor;
 import org.itmo.prog.lab3.models.text.Verb;
 
-public class ActionFromVerb extends BasicAction {
-    protected Verb verb;
-
-    public ActionFromVerb(Verb verb) {
-        this.verb = verb;
+public class NegativeActionFromVerb extends ActionFromVerb {
+    public NegativeActionFromVerb(Verb verb) {
+        super(verb);
     }
 
     @Override
@@ -16,7 +14,7 @@ public class ActionFromVerb extends BasicAction {
         return new ActionResult() {
             @Override
             public String getTextWithoutActor() {
-                return verb.getForm(actor.getGender());
+                return "не " + verb.getForm(actor.getGender());
             }
 
             @Override

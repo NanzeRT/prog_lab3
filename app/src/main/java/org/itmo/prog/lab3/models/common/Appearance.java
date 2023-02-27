@@ -1,5 +1,6 @@
 package org.itmo.prog.lab3.models.common;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.itmo.prog.lab3.models.actors.Sense;
@@ -16,7 +17,7 @@ public class Appearance {
     }
 
     public Appearance merge(Appearance other) {
-        Set<Property> newProperties = Set.copyOf(properties);
+        Set<Property> newProperties = new HashSet<>(properties);
         newProperties.addAll(other.properties);
         return new Appearance(newProperties);
     }
@@ -34,10 +35,9 @@ public class Appearance {
     }
 
     private float countSimmilarPropertiesPart(Appearance other, Sense judgingSense) {
-        var knownProperties = judgingSense.getKnownProperties();
+        var knownProperties = new HashSet<>(judgingSense.getKnownProperties());
 
-        knownProperties.retainAll(properties);
-        knownProperties.retainAll(other.properties);
+        knownProperties.retainAll(merge(other).properties);
 
         var simmilarKnownPropertiesCount = knownProperties.stream()
                 .filter(properties::contains)

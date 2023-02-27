@@ -2,13 +2,16 @@ package org.itmo.prog.lab3.models.environment;
 
 
 
+import org.itmo.prog.lab3.models.actions.interfaces.Action;
+import org.itmo.prog.lab3.models.actions.results.ActionResult;
+import org.itmo.prog.lab3.models.actors.Actor;
 import org.itmo.prog.lab3.models.common.Appearance;
 import org.itmo.prog.lab3.models.common.interfaces.HasAppearance;
 import org.itmo.prog.lab3.models.text.Case;
+import org.itmo.prog.lab3.models.text.GenderOrPlural;
 import org.itmo.prog.lab3.models.text.Name;
-import org.itmo.prog.lab3.models.text.interfaces.Named;
 
-public abstract class Environment implements HasAppearance, Named {
+public abstract class Environment implements HasAppearance, Actor {
     protected final Name name;
     protected final Appearance appearance;
 
@@ -35,6 +38,21 @@ public abstract class Environment implements HasAppearance, Named {
     @Override
     public String getShortCased(Case c) {
         return name.getCased(c);
+    }
+
+    @Override
+    public GenderOrPlural getGender() {
+        return name.getGender();
+    }
+
+    @Override
+    public String getPronoun(Case c) {
+        return getGender().getPronoun().getCased(c);
+    }
+
+    @Override
+    public ActionResult doAction(Action action) {
+        return action.execute(this);
     }
 
     @Override
