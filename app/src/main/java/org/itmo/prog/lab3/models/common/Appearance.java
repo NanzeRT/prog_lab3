@@ -48,4 +48,26 @@ public class Appearance {
 
         return (float) simmilarKnownPropertiesCount / knownPropertiesCount;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "properties=" + properties +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        Appearance other = (Appearance) obj;
+        return properties.equals(other.properties);
+    }
+
+    @Override
+    public int hashCode() {
+        return properties.hashCode();
+    }
 }

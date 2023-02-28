@@ -34,6 +34,40 @@ public class GerundActionWithTargetInfinitiveActionFromVerb extends BasicAction 
             public Verb.TimeForm getTime() {
                 return TimeForm.GERUND;
             }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + '{' +
+                        "actor=" + getActor() +
+                        ", text='" + getTextWithoutActor() + '\'' +
+                        ", time=" + getTime() +
+                        ", verb=" + verb +
+                        ", action=" + action +
+                        '}';
+            }
         };
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "verb=" + verb +
+                ", action=" + action +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        GerundActionWithTargetInfinitiveActionFromVerb other = (GerundActionWithTargetInfinitiveActionFromVerb) obj;
+        return verb.equals(other.verb) && action.equals(other.action);
+    }
+
+    @Override
+    public int hashCode() {
+        return verb.hashCode() + action.hashCode();
     }
 }

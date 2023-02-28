@@ -63,4 +63,30 @@ public class Shorty implements AliveActor {
     public Appearance getAppearance() {
         return name.getAppearance();
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "name=" + name +
+                ", sense=" + sense +
+                ", gender=" + gender +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        Shorty shorty = (Shorty) obj;
+        return name == shorty.name && sense == shorty.sense && gender == shorty.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + sense.hashCode();
+        return result * 31 + gender.hashCode();
+    }
 }

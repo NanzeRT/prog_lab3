@@ -87,4 +87,26 @@ public class Group implements Actor {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "actors=" + actors +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        var other = (Group) obj;
+        return actors.equals(other.actors);
+    }
+
+    @Override
+    public int hashCode() {
+        return actors.hashCode();
+    }
 }

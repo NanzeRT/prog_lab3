@@ -28,6 +28,38 @@ public class ActionFromVerb extends BasicAction {
             public Verb.TimeForm getTime() {
                 return verb.getTime();
             }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + '{' +
+                        "actor=" + getActor() +
+                        ", text='" + getTextWithoutActor() + '\'' +
+                        ", time=" + getTime() +
+                        ", verb=" + verb +
+                        '}';
+            }
         };
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "verb=" + verb +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        ActionFromVerb other = (ActionFromVerb) obj;
+        return verb.equals(other.verb);
+    }
+
+    @Override
+    public int hashCode() {
+        return verb.hashCode();
     }
 }

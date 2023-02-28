@@ -6,12 +6,11 @@ import org.itmo.prog.lab3.models.actions.interfaces.Action;
 import org.itmo.prog.lab3.models.actions.results.ActionResult;
 import org.itmo.prog.lab3.models.actors.Actor;
 import org.itmo.prog.lab3.models.common.Appearance;
-import org.itmo.prog.lab3.models.common.interfaces.HasAppearance;
 import org.itmo.prog.lab3.models.text.Case;
 import org.itmo.prog.lab3.models.text.GenderOrPlural;
 import org.itmo.prog.lab3.models.text.Name;
 
-public abstract class Environment implements HasAppearance, Actor {
+public abstract class Environment implements Actor {
     protected final Name name;
     protected final Appearance appearance;
 
@@ -74,8 +73,8 @@ public abstract class Environment implements HasAppearance, Actor {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
+        if (obj == null)
+            return false;
         if (getClass() != obj.getClass())
             return false;
         Environment other = (Environment) obj;

@@ -32,6 +32,40 @@ public class ActionWithTargetFromVerb extends BasicAction {
             public Verb.TimeForm getTime() {
                 return verb.getTime();
             }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + '{' +
+                        "actor=" + getActor() +
+                        ", text='" + getTextWithoutActor() + '\'' +
+                        ", time=" + getTime() +
+                        ", verb=" + verb +
+                        ", target=" + target +
+                        '}';
+            }
         };
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "verb=" + verb +
+                ", target=" + target +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        ActionWithTargetFromVerb other = (ActionWithTargetFromVerb) obj;
+        return verb.equals(other.verb) && target.equals(other.target);
+    }
+
+    @Override
+    public int hashCode() {
+        return verb.hashCode() + 31 * target.hashCode();
     }
 }

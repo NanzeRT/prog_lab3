@@ -70,7 +70,7 @@ public class Mountains extends Environment {
 
     @Override
     public String toString() {
-        return "Mountains{" +
+        return getClass().getSimpleName() + '{' +
                 "name=" + name +
                 ", tops=" + tops +
                 ", slopes=" + slopes +

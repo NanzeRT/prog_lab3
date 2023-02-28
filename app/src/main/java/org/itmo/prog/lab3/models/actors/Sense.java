@@ -37,4 +37,40 @@ public class Sense {
     public void addKnownProperty(Property property) {
         knownProperties.add(property);
     }
+
+    public void removeKnownProperty(Property property) {
+        knownProperties.remove(property);
+    }
+
+    public boolean isKnownProperty(Property property) {
+        return knownProperties.contains(property);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "partOfSimmilarPropertiesToConsiderAlike=" + partOfSimmilarPropertiesToConsiderAlike +
+                ", partOfSimmilarPropertiesToConsiderSimmilar=" + partOfSimmilarPropertiesToConsiderSimmilar +
+                ", knownProperties=" + knownProperties +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        Sense sense = (Sense) obj;
+        return partOfSimmilarPropertiesToConsiderAlike == sense.partOfSimmilarPropertiesToConsiderAlike &&
+                partOfSimmilarPropertiesToConsiderSimmilar == sense.partOfSimmilarPropertiesToConsiderSimmilar &&
+                knownProperties.equals(sense.knownProperties);
+    }
+
+    @Override
+    public int hashCode() {
+        return Float.hashCode(partOfSimmilarPropertiesToConsiderAlike) +
+                Float.hashCode(partOfSimmilarPropertiesToConsiderSimmilar) +
+                knownProperties.hashCode();
+    }
 }

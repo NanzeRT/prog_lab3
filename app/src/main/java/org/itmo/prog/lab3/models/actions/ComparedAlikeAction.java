@@ -41,6 +41,41 @@ public class ComparedAlikeAction extends BasicAction {
             public boolean isPositive() {
                 return result;
             }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + '{' +
+                        "actor=" + getActor() +
+                        ", text='" + getTextWithoutActor() + '\'' +
+                        ", time=" + getTime() +
+                        ", thing1=" + thing1 +
+                        ", thing2=" + thing2 +
+                        ", result=" + result +
+                        '}';
+            }
         };
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "thing1=" + thing1 +
+                ", thing2=" + thing2 +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        ComparedAlikeAction other = (ComparedAlikeAction) obj;
+        return thing1.equals(other.thing1) && thing2.equals(other.thing2);
+    }
+
+    @Override
+    public int hashCode() {
+        return thing1.hashCode() + 31 * thing2.hashCode();
     }
 }

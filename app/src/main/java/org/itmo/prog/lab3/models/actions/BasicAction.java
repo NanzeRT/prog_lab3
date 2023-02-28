@@ -40,4 +40,21 @@ public abstract class BasicAction implements Action {
     protected Action getFallbackAction() {
         throw new CanNotBeFailedException();
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        return obj.getClass() == getClass();
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

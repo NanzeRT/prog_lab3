@@ -23,4 +23,26 @@ public class ReverseFormatterWithInsert extends ActionResultFormatter {
                 throw new FormatterTimeException("Unknown time: " + result.getTime());
         }
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "insert='" + insert + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        ReverseFormatterWithInsert other = (ReverseFormatterWithInsert) obj;
+        return insert.equals(other.insert);
+    }
+
+    @Override
+    public int hashCode() {
+        return insert.hashCode() + getClass().hashCode();
+    }
 }

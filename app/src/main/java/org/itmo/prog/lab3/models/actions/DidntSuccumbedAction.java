@@ -30,6 +30,38 @@ public class DidntSuccumbedAction extends BasicAction {
             public Verb.TimeForm getTime() {
                 return VerbDictionary.Succumbed.getTime();
             }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + '{' +
+                        "actor=" + getActor() +
+                        ", text='" + getTextWithoutActor() + '\'' +
+                        ", time=" + getTime() +
+                        ", thingToSuccumb=" + thingToSuccumb +
+                        '}';
+            }
         };
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + '{' +
+                "thingToSuccumb=" + thingToSuccumb +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        DidntSuccumbedAction action = (DidntSuccumbedAction) obj;
+        return thingToSuccumb.equals(action.thingToSuccumb);
+    }
+
+    @Override
+    public int hashCode() {
+        return thingToSuccumb.hashCode();
     }
 }

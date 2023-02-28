@@ -77,10 +77,22 @@ public class Scene {
 
     @Override
     public String toString() {
-        return "Scene{" +
+        return getClass().getSimpleName() + '{' +
                 "actors=" + actors +
                 ", mainActor=" + mainActor +
                 ", envinronments=" + envinronments +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj.getClass() != getClass())
+            return false;
+        Scene other = (Scene) obj;
+        return actors.equals(other.actors) &&
+                mainActor.equals(other.mainActor) &&
+                envinronments.equals(other.envinronments);
     }
 }

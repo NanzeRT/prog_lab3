@@ -26,6 +26,21 @@ public class NegativeActionFromVerb extends ActionFromVerb {
             public Verb.TimeForm getTime() {
                 return verb.getTime();
             }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + '{' +
+                        "actor=" + getActor() +
+                        ", text='" + getTextWithoutActor() + '\'' +
+                        ", time=" + getTime() +
+                        ", verb=" + verb +
+                        '}';
+            }
         };
+    }
+
+    @Override
+    public int hashCode() {
+        return verb.hashCode() + 1;
     }
 }
